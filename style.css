@@ -1,0 +1,438 @@
+:root {
+      --paper: #f4efe3;
+      --paper-deep: #e7dcc8;
+      --ink: #1f2522;
+      --muted: #6d675e;
+      --ru: #8fb8ad;
+      --ru-deep: #4f7f78;
+      --cinnabar: #a33a2d;
+      --gold: #b89658;
+      --line: rgba(31, 37, 34, .16);
+      --shadow: 0 16px 48px rgba(37, 34, 25, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Noto Serif SC", "Songti SC", "Microsoft YaHei", serif;
+      /* 使用第二段代码的背景图 bg.jpg，同时保留原有宋代纹理层叠加 */
+      background: #f8f3e8 url("../assets/images/bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    /* 半透柔光层让文字阅读更舒适，保留原有宋韵氛围 */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(248, 243, 232, 0.38);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .layout {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(244, 239, 227, .86);
+      backdrop-filter: blur(10px);
+      overflow: auto;
+      z-index: 12;
+    }
+
+    .seal {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: #fff;
+      background: var(--cinnabar);
+      font-family: "STKaiti", "KaiTi", serif;
+      line-height: 1.05;
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,.2);
+    }
+
+    nav a {
+      display: block;
+      padding: 9px 10px;
+      margin: 2px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--ink);
+      border-left-color: var(--cinnabar);
+      background: rgba(143, 184, 173, .14);
+    }
+
+    main { min-width: 0; }
+    section {
+      padding: 72px clamp(24px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(248, 243, 232, 0.2);
+      backdrop-filter: blur(2px);
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(244, 239, 227, 0.3), rgba(244, 239, 227, 0.85)),
+                  radial-gradient(ellipse at 48% 66%, rgba(31, 37, 34, .16), transparent 34rem);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 5%;
+      bottom: 6%;
+      height: 46%;
+      opacity: .24;
+      background: linear-gradient(170deg, transparent 0 44%, rgba(31,37,34,.2) 45% 46%, transparent 49%),
+                  linear-gradient(162deg, transparent 0 54%, rgba(31,37,34,.16) 55% 56%, transparent 59%),
+                  radial-gradient(ellipse at 22% 70%, rgba(31,37,34,.2), transparent 18rem),
+                  radial-gradient(ellipse at 72% 64%, rgba(79,127,120,.42), transparent 20rem);
+      filter: blur(.2px);
+    }
+
+    .eyebrow {
+      color: var(--cinnabar);
+      font-weight: 700;
+      font-size: 20px;
+      margin: 0 0 14px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 980px;
+      font-family: "STKaiti", "KaiTi", "Songti SC", serif;
+      font-size: clamp(48px, 7vw, 104px);
+      line-height: 1.06;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3vw, 44px);
+      font-family: "STKaiti", "KaiTi", "Songti SC", serif;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin: 24px 0 0;
+      color: #3f413c;
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 24px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card, .chart-card, .quote-card {
+      background: rgba(255, 252, 244, .78);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card { padding: 20px; }
+    .metric .value {
+      display: block;
+      margin-top: 10px;
+      color: var(--ru-deep);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      font-weight: 700;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .chart-card { padding: 18px; min-height: 420px; }
+    .chart { width: 100%; height: 360px; }
+    .chart.category-detail { height: 430px; }
+    .chart.tall { height: 500px; }
+    .chart.small { height: 300px; }
+    .chart.word-frequency { height: 430px; }
+
+    .word-overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .insight {
+      border-left: 4px solid var(--cinnabar);
+      padding: 18px 20px;
+      color: #3c332d;
+      background: rgba(163, 58, 45, .07);
+      line-height: 1.8;
+      border-radius: 16px;
+    }
+
+    /* 词云 */
+    .word-cloud {
+      width: min(760px, 100%);
+      aspect-ratio: 1.38;
+      margin: 0 auto;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 24%, rgba(244,239,227,.72) 0 10%, transparent 11%),
+                  radial-gradient(ellipse at 50% 56%, rgba(143,184,173,.3), rgba(79,127,120,.12) 58%, rgba(163,58,45,.08));
+      clip-path: polygon(42% 1%, 58% 1%, 61% 13%, 72% 19%, 84% 34%, 89% 56%, 83% 76%, 67% 91%, 50% 97%, 32% 91%, 16% 76%, 10% 56%, 15% 34%, 28% 19%, 39% 13%);
+      overflow: hidden;
+    }
+
+    .word-cloud span {
+      position: absolute;
+      color: var(--ink);
+      font-family: "STKaiti", "KaiTi", serif;
+      line-height: 1;
+      white-space: nowrap;
+      display: block;
+      transform-origin: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .season-cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .season-card strong {
+      display: block;
+      color: var(--cinnabar);
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      padding: 6px 9px;
+      border: 1px solid rgba(79, 127, 120, .26);
+      background: rgba(143, 184, 173, .13);
+      border-radius: 999px;
+      font-size: 13px;
+      color: #314f4a;
+    }
+
+    /* ========= 地域模块：地图容器样式（第二段风格融合） ========= */
+    .region-map-wrapper {
+      position: relative;
+      background: rgba(248, 243, 232, 0.68);
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      border: 1px solid rgba(211, 196, 169, 0.6);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .map-full {
+      width: 100%;
+      height: 560px;
+    }
+
+    /* 侧边弹窗 —— 点击省份后显示，不复原滚动隐藏逻辑，只在点击时出现 */
+    #info-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 340px;
+      max-height: 90%;
+      overflow-y: auto;
+      background: rgba(255, 253, 248, 0.98);
+      backdrop-filter: blur(12px);
+      border-left: 4px solid #b08e7c;
+      border-radius: 24px;
+      padding: 20px 16px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+      z-index: 30;
+      transition: all 0.25s ease;
+      font-family: "Noto Serif SC", "微软雅黑", sans-serif;
+      display: none; /* 默认隐藏，点击省份后显示 */
+    }
+    #info-panel.show {
+      display: block;
+      animation: fadeSlide 0.25s ease;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .panel-close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: #8e6454;
+      transition: color 0.2s;
+      font-weight: bold;
+      line-height: 1;
+    }
+    .panel-close-btn:hover { color: #a33a2d; }
+    #province-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid #d3c4a9;
+      margin-bottom: 12px;
+    }
+    #panel-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #5b3426;
+      text-align: center;
+      font-family: "KaiTi", serif;
+    }
+    .info-item {
+      margin: 12px 0;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .info-label {
+      font-weight: bold;
+      color: #8e6454;
+    }
+    #total-count {
+      font-size: 26px;
+      font-weight: bold;
+      color: #a33a2d;
+    }
+    #word-chart {
+      width: 100%;
+      height: 200px;
+      margin-top: 6px;
+    }
+    .sub-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #5b3426;
+      text-align: center;
+      margin: 12px 0 6px;
+      font-family: KaiTi;
+    }
+    .poem-wrap {
+      background: #f6f0e8;
+      border-left: 4px solid #b08e7c;
+      padding: 10px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .poem-name { font-weight: bold; text-align: center; font-size: 15px; }
+    .poem-author { text-align: center; font-size: 13px; color: #7b5a4a; }
+    .poem-content {
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: normal;
+      word-break: break-word;
+      margin-top: 8px;
+      text-align: justify;
+    }
+    .hide { display: none !important; }
+    .empty-tip { text-align: center; padding: 20px; color: #8e6454; }
+
+    .searchbar {
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    input, button {
+      height: 42px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      font: inherit;
+    }
+    input {
+      padding: 0 14px;
+      background: rgba(255, 252, 244, .8);
+    }
+    button {
+      background: var(--ink);
+      color: var(--paper);
+      cursor: pointer;
+    }
+    .results {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .result-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 252, 244, .72);
+    }
+    mark {
+      background: rgba(163, 58, 45, .18);
+      color: var(--cinnabar);
+      padding: 0 2px;
+    }
+    footer {
+      padding: 44px clamp(24px, 5vw, 72px);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { position: static; height: auto; border-bottom: 1px solid var(--line); }
+      nav { display: flex; overflow-x: auto; gap: 4px; }
+      nav a { white-space: nowrap; border-left: 0; border-bottom: 3px solid transparent; }
+      .cols-4, .cols-3, .cols-2, .season-cards, .results { grid-template-columns: 1fr; }
+      .word-overview { grid-template-columns: 1fr; }
+      section { padding: 52px 18px; }
+      .map-full { height: 460px; }
+      #info-panel { position: fixed; top: 10%; right: 5%; left: 5%; width: auto; max-height: 80%; }
+    }
